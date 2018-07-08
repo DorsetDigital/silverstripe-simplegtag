@@ -1,0 +1,8 @@
+---
+Name: 'dd-simplegtag'
+---
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - DorsetDigital\SimpleGTag\GTagConfig
+    
