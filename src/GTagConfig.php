@@ -7,13 +7,13 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\FieldList;
 
 /**
-	* Description of GTagConfig
-	*
-	* @author tim
-	*/
+ * Description of GTagConfig
+ *
+ * @author tim
+ */
 class	GTagConfig	extends DataExtension {
 	
-	    private static $db = [
+     private static $db = [
         'GTMID' => 'Varchar(255)'
     ];
     
