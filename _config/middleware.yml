@@ -7,4 +7,4 @@ SilverStripe\Core\Injector\Injector:
   SilverStripe\Control\Director:
     properties:
       Middlewares:
-        CustomTagMiddleware: %$DorsetDigital\SimpleGTag\GTagMiddleware
+        CustomTagMiddleware: '%$DorsetDigital\SimpleGTag\GTagMiddleware'
