@@ -2,22 +2,23 @@
 
 namespace DorsetDigital\SimpleGTag;
 
+use Broarm\CookieConsent\CookieConsent;
 use SilverStripe\Admin\AdminRootController;
-use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\Middleware\HTTPMiddleware;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\HTML;
 
-class    GTagMiddleware implements HTTPMiddleware
+class GTagMiddleware implements HTTPMiddleware
 {
 
-    use    Injectable;
+    use Injectable;
 
-    use    Configurable;
+    use Configurable;
 
     /**
      * @config
@@ -44,7 +45,7 @@ class    GTagMiddleware implements HTTPMiddleware
 
         $response = $delegate($request);
 
-        if ($this->getIsAdmin($request) === true) {
+        if (($this->getIsAdmin($request) === true) || ($this->getCookiesOK() !== true)) {
             return $response;
         }
 
@@ -77,6 +78,21 @@ class    GTagMiddleware implements HTTPMiddleware
             }
         }
         return false;
+    }
+
+    /**
+     * If the cookie consent module is installed, check that we have analytics allowed
+     * @return bool
+     * @throws \Exception
+     */
+    private function getCookiesOK() {
+        $module = ModuleLoader::getModule('bramdeleeuw/cookieconsent');
+        if ($module) {
+            if (!CookieConsent::check('Analytics')) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private function addBodyTag(&$response)
