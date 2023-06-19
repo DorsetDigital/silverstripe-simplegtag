@@ -100,10 +100,12 @@ class GTagMiddleware implements HTTPMiddleware
         $data = ArrayData::create(['GTMID' => $this->gtm_id]);
         $tag = $data->renderWith('BodySnippet');
         $body = $response->getBody();
-        $pattern = '/\<body.*\>/';
-        $replace = '${0}' . "\n" . $tag;
-        $newBody = preg_replace($pattern, $replace, $body);
-        $response->setBody($newBody);
+        if ($body != '') {
+            $pattern = '/\<body.*\>/';
+            $replace = '${0}' . "\n" . $tag;
+            $newBody = preg_replace($pattern, $replace, $body);
+            $response->setBody($newBody);
+        }
     }
 
     private function addHeadTag(&$response)
@@ -111,8 +113,10 @@ class GTagMiddleware implements HTTPMiddleware
         $data = ArrayData::create(['GTMID' => $this->gtm_id]);
         $tag = $data->renderWith('HeadSnippet');
         $body = $response->getBody();
-        $body = str_replace('<head>', "<head>" . $tag, $body);
-        $response->setBody($body);
+        if ($body != '') {
+            $body = str_replace('<head>', "<head>" . $tag, $body);
+            $response->setBody($body);
+        }
     }
 
     private function addPrefetch(&$response)
@@ -123,8 +127,10 @@ class GTagMiddleware implements HTTPMiddleware
         ];
         $pfTag = "\n" . HTML::createTag('link', $atts) . "\n";
         $body = $response->getBody();
-        $body = str_replace('<head>', "<head>" . $pfTag, $body);
-        $response->setBody($body);
+        if ($body != '') {
+            $body = str_replace('<head>', "<head>" . $pfTag, $body);
+            $response->setBody($body);
+        }
     }
 
 }
