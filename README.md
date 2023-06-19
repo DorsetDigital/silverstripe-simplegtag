@@ -21,6 +21,6 @@ Once installed, set your GTM ID in the site config.
 The module injects code into the html `<head>` and the `<noscript>` snippet into the page at the start of the `<body>`
 
  
-##Consent
+## Consent
 
 If you are using the cookie consent module (https://github.com/TheBnl/silverstripe-cookie-consent) then this module will only add the GTM tags if a user has accepted analytics cookies.
