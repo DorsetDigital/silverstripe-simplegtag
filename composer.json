@@ -17,7 +17,6 @@
     }
   ],
   "require": {
-    "silverstripe/vendor-plugin": "^1.0",
     "silverstripe/cms": "^4.0 | ^5.0"
   },
   "suggest": {
