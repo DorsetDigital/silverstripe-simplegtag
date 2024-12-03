@@ -5,6 +5,7 @@ namespace DorsetDigital\SimpleGTag;
 use Broarm\CookieConsent\CookieConsent;
 use SilverStripe\Admin\AdminRootController;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\Middleware\HTTPMiddleware;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
@@ -45,7 +46,7 @@ class GTagMiddleware implements HTTPMiddleware
 
         $response = $delegate($request);
 
-        if (($this->getIsAdmin($request) === true) || ($this->getCookiesOK() !== true)) {
+        if (($this->getIsAdmin($request) === true) || ($this->getCookiesOK() !== true) || ($this->getIsXML($response) !== false)) {
             return $response;
         }
 
@@ -76,6 +77,19 @@ class GTagMiddleware implements HTTPMiddleware
             if (substr($currentPath, 0, strlen($adminPath)) === $adminPath) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * Try to determine if the response is XML / XSL
+     * @param HTTPResponse $response
+     * @return bool
+     */
+    public function getIsXML(HTTPResponse $response) {
+        $ctHeader = $response->getHeader('Content-Type');
+        if (stripos($ctHeader, 'xml') !== false || stripos($ctHeader, 'xsl') !== false) {
+            return true;
         }
         return false;
     }
