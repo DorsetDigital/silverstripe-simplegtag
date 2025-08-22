@@ -4,14 +4,14 @@ namespace DorsetDigital\SimpleGTag;
 
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 
 /**
  * Description of GTagConfig
  *
  * @author tim
  */
-class    GTagConfig extends DataExtension
+class    GTagConfig extends Extension
 {
 
     private static $db = [
