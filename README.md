@@ -7,7 +7,7 @@ A very simple way to add Google Tags to a site for analytics, adwords, etc.
 [![Version](http://img.shields.io/packagist/v/dorsetdigital/silverstripe-simplegtag.svg?style=flat)](https://packagist.org/packages/dorsetdigital/silverstripe-simplegtag)
 
 # Requirements
-*Silverstripe 4.x
+*Silverstripe 6.x   (for CMS 4/5, please use the 2.x release)
 
 
 # Installation

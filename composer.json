@@ -17,7 +17,7 @@
     }
   ],
   "require": {
-    "silverstripe/cms": "^4.0 | ^5.0"
+    "silverstripe/cms": "^6"
   },
   "suggest": {
     "bramdeleeuw/cookieconsent": "Cookie consent module"
